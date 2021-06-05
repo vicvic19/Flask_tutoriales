@@ -20,6 +20,10 @@ def funcion_inicio():
         return 'No ha hecho login'
     #return f'Hola Mundo desde Flask'
 
+@app.route('/login/', methods = ['GET', 'POST'])
+def funcion_login():
+    return render_template('login.html')
+
 @app.route('/saludar/<nombre>')
 def funcion_saludar(nombre):
     app.logger.warn(f'en el path {request.path}')

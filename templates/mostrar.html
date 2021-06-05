@@ -9,6 +9,14 @@
 <body>
  <h1>Hola</h1>
  <p1>Tu nombre es: {{nombre}}</p1>
-
+ <div>
+     <a href="/">Regresar al inicio metodo 1</a>
+ </div>
+ <div>
+    <a href ="{{url_for('funcion_inicio')}}">Regresar al inicio metodo 2</a>
+</div>
+<div>
+    <a href ="{{url_for('funcion_edad', edad = 10)}}">Regresar al inicio metodo 3</a>
+</div>
 </body>
 </html>

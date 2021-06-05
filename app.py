@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, url_for
+from flask import Flask, request, render_template, url_for, jsonify
 from werkzeug.utils import redirect
 from werkzeug.exceptions import abort
 
@@ -56,3 +56,4 @@ def pagina_no_encontrada(error):
 def funcion_mostrarnombre_json(nombre):
     valores = {'nombre': nombre}
     return jsonify(valores)
+

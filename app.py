@@ -10,3 +10,13 @@ def funcion_inicio():
     app.logger.warning('Mensaje desde warning')
     app.logger.error('Mensaje desde error')
     return f'Hola Mundo desde Flask'
+
+@app.route('/saludar/<nombre>')
+def funcion_saludar(nombre):
+    app.logger.warn(f'en el path {request.path}')
+    return f'Hola como estas {nombre}'
+
+@app.route('/edad/<int:edad>')
+def funcion_edad(edad):
+    app.logger.warn(f'en el path {request.path}')
+    return f'Hola tu edad +1  es {edad + 1}'

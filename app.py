@@ -20,3 +20,8 @@ def funcion_saludar(nombre):
 def funcion_edad(edad):
     app.logger.warn(f'en el path {request.path}')
     return f'Hola tu edad +1  es {edad + 1}'
+
+@app.route('/mostrar/<nombre>', methods = ['GET','POST'])
+def funcion_mostrarnombre(nombre):
+    app.logger.warn(f'en el path {request.path}')
+    return f'Tu nombre es: {nombre}'

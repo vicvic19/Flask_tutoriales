@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, url_for
+from werkzeug.utils import redirect
 
 app = Flask(__name__)
 
@@ -30,3 +31,8 @@ def funcion_mostrarnombre(nombre):
 def funcion_mostrarnombre2(nombre):
     app.logger.warn(f'en el path {request.path}')
     return render_template('mostrar.html', nombre= nombre)
+
+@app.route('/redireccionar', methods = ['GET','POST'])
+def funcion_redireccionar():
+    app.logger.warn(f'en el path {request.path}')
+    return redirect(url_for('funcion_inicio'))

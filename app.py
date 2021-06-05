@@ -36,3 +36,8 @@ def funcion_mostrarnombre2(nombre):
 def funcion_redireccionar():
     app.logger.warn(f'en el path {request.path}')
     return redirect(url_for('funcion_inicio'))
+
+@app.route('/redireccionar2/<nombre>', methods = ['GET','POST'])
+def funcion_redireccionar2(nombre):
+    app.logger.warn(f'en el path {request.path}')
+    return redirect(url_for('funcion_mostrarnombre2', nombre = nombre))

@@ -20,7 +20,7 @@ def funcion_inicio():
         return 'No ha hecho login'
     #return f'Hola Mundo desde Flask'
 
-@app.route('/login/', methods = ['GET', 'POST'])
+@app.route('/login', methods = ['GET', 'POST'])
 def funcion_login():
     if request.method == 'POST':
         # Omitimos validacion de usuario y password
@@ -28,7 +28,7 @@ def funcion_login():
         # Agregamos al usuario a la sesion
         session['username'] = usuario
         return redirect(url_for('funcion_inicio'))
-    #return render_template('login.html')
+    return render_template('login.html')
 
 @app.route('/logout')
 def funcion_logout():

@@ -1,0 +1,12 @@
+Para correr en modo debug:
+
+1)
+export FLASK_APP=archivo.py
+
+2)
+export FLASK_ENV=development
+export FLASK_ENV=production
+
+
+Si se esta en modo debug (development) se mostraran todos, si se esta en production
+se mostraran desde warning (no info ni debug)

@@ -30,6 +30,11 @@ def funcion_login():
         return redirect(url_for('funcion_inicio'))
     #return render_template('login.html')
 
+@app.route('/logout')
+def funcion_logout():
+    session.pop('username')
+    return redirect(url_for('funcion_inicio'))
+
 @app.route('/saludar/<nombre>')
 def funcion_saludar(nombre):
     app.logger.warn(f'en el path {request.path}')

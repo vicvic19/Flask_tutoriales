@@ -15,14 +15,20 @@ def funcion_inicio():
     app.logger.warning('Mensaje desde warning')
     app.logger.error('Mensaje desde error')
     if 'username' in session:
-        return 'El usuario ya he hecho login'
+        return f'El usuario ya he hecho login {session["username"]}'
     else:
         return 'No ha hecho login'
     #return f'Hola Mundo desde Flask'
 
 @app.route('/login/', methods = ['GET', 'POST'])
 def funcion_login():
-    return render_template('login.html')
+    if request.method == 'POST':
+        # Omitimos validacion de usuario y password
+        usuario = request.form['username']
+        # Agregamos al usuario a la sesion
+        session['username'] = usuario
+        return redirect(url_for('funcion_inicio'))
+    #return render_template('login.html')
 
 @app.route('/saludar/<nombre>')
 def funcion_saludar(nombre):

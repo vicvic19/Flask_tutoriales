@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, url_for
 from werkzeug.utils import redirect
+from werkzeug.exceptions import abort
 
 app = Flask(__name__)
 
@@ -41,3 +42,8 @@ def funcion_redireccionar():
 def funcion_redireccionar2(nombre):
     app.logger.warn(f'en el path {request.path}')
     return redirect(url_for('funcion_mostrarnombre2', nombre = nombre))
+
+
+@app.route('/salir')
+def salir():
+    return abort(404)

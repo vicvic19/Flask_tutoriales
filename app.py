@@ -1,8 +1,11 @@
 from flask import Flask, request, render_template, url_for, jsonify
+from flask.globals import session
 from werkzeug.utils import redirect
 from werkzeug.exceptions import abort
 
 app = Flask(__name__)
+app.secret_key = 'Mi_llave_secreta'
+
 
 @app.route('/')
 # Decorador que modifica el metodo que viene despues
@@ -11,7 +14,11 @@ def funcion_inicio():
     app.logger.info('Mensaje desde debug entrando al path {}'.format(request.path))
     app.logger.warning('Mensaje desde warning')
     app.logger.error('Mensaje desde error')
-    return f'Hola Mundo desde Flask'
+    if 'username' in session:
+        return 'El usuario ya he hecho login'
+    else:
+        return 'No ha hecho login'
+    #return f'Hola Mundo desde Flask'
 
 @app.route('/saludar/<nombre>')
 def funcion_saludar(nombre):

@@ -50,3 +50,9 @@ def salir():
 @app.errorhandler(404)
 def pagina_no_encontrada(error):
     return render_template('error404.html', error = error), 404
+
+# REST Representational state transfer
+@app.route('/api/mostrar/<nombre>')
+def funcion_mostrarnombre_json(nombre):
+    valores = {'nombre': nombre}
+    return jsonify(valores)

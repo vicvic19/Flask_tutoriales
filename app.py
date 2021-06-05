@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
@@ -25,3 +25,8 @@ def funcion_edad(edad):
 def funcion_mostrarnombre(nombre):
     app.logger.warn(f'en el path {request.path}')
     return f'Tu nombre es: {nombre}'
+
+@app.route('/mostrar2/<nombre>', methods = ['GET','POST'])
+def funcion_mostrarnombre2(nombre):
+    app.logger.warn(f'en el path {request.path}')
+    return render_template('mostrar.html', nombre= nombre)

@@ -43,7 +43,10 @@ def funcion_redireccionar2(nombre):
     app.logger.warn(f'en el path {request.path}')
     return redirect(url_for('funcion_mostrarnombre2', nombre = nombre))
 
-
 @app.route('/salir')
 def salir():
     return abort(404)
+
+@app.errorhandler(404)
+def pagina_no_encontrada(error):
+    return render_template('error404.html', error = error), 404

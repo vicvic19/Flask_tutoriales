@@ -1,0 +1,4 @@
+flask_env_pip/
+__pycache__
+.DS_Store
+

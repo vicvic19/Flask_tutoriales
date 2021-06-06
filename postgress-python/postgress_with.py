@@ -2,7 +2,7 @@ import psycopg2
 
 conexion = psycopg2.connect(user = 'postgres', password = 'admin', host= '127.0.0.1', port = '5432', database = 'test_db')
 
-tipo = input("Ingresa lo que harás ['Mostrar todos', 'Mostrar uno', 'Mostrar uno por uno']: ")
+tipo = input("Ingresa lo que harás ['Mostrar todos', 'Mostrar uno', 'Mostrar uno por uno','Insertar uno', 'Insertar varios']: ")
 if tipo == 'Mostrar todos':
     try:
         with conexion:
@@ -45,6 +45,44 @@ if tipo == 'Mostrar uno por uno':
                 registros = cursor.fetchall()
                 for registro in registros:
                     print(registro)
+
+    except Exception as e:
+        print(f'Ocurrio un error: {e}')
+
+    finally:
+        conexion.close()
+
+if tipo == 'Insertar varios':
+    try:
+        with conexion:
+            with conexion.cursor() as cursor:
+                sentencia = 'INSERT INTO persona(nombre, apellido, email) VALUES (%s, %s, %s)'
+                valores = (
+                    ('Ramon', 'Ramirez', 'rramirez@mail.com'),
+                    ('Pedro', 'Ramirez', 'pramirez@mail.com'),
+                    ('Sebastian', 'Ramirez', 'sramirez@mail.com')
+                )
+
+                cursor.executemany(sentencia, valores)
+                registros_insertados = cursor.rowcount
+                print(f'Registros insertados: {registros_insertados}')
+
+    except Exception as e:
+        print(f'Ocurrio un error: {e}')
+
+    finally:
+        conexion.close()
+
+if tipo == 'Insertar uno':
+    try:
+        with conexion:
+            with conexion.cursor() as cursor:
+                sentencia = 'INSERT INTO persona(nombre, apellido, email) VALUES (%s, %s, %s)'
+                valores = ('Carlos', 'Ramirez', 'cramirez@mail.com')
+
+                cursor.execute(sentencia, valores)
+                registros_insertados = cursor.rowcount
+                print(f'Registros insertados: {registros_insertados}')
 
     except Exception as e:
         print(f'Ocurrio un error: {e}')

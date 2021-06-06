@@ -2,7 +2,7 @@ import psycopg2
 
 conexion = psycopg2.connect(user = 'postgres', password = 'admin', host= '127.0.0.1', port = '5432', database = 'test_db')
 
-tipo = input("Ingresa lo que harás ['Mostrar todos', 'Mostrar uno', 'Mostrar uno por uno','Insertar uno', 'Insertar varios', 'Actualizar uno']: ")
+tipo = input("Ingresa lo que harás ['Mostrar todos', 'Mostrar uno', 'Mostrar uno por uno','Insertar uno', 'Insertar varios', 'Actualizar uno', 'Actualizar varios']: ")
 if tipo == 'Mostrar todos':
     try:
         with conexion:

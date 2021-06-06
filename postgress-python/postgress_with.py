@@ -2,7 +2,7 @@ import psycopg2
 
 conexion = psycopg2.connect(user = 'postgres', password = 'admin', host= '127.0.0.1', port = '5432', database = 'test_db')
 
-tipo = input("Ingresa lo que harás ['Mostrar todos', 'Mostrar uno', 'Mostrar uno por uno','Insertar uno', 'Insertar varios']: ")
+tipo = input("Ingresa lo que harás ['Mostrar todos', 'Mostrar uno', 'Mostrar uno por uno','Insertar uno', 'Insertar varios', 'Actualizar uno']: ")
 if tipo == 'Mostrar todos':
     try:
         with conexion:
@@ -83,6 +83,44 @@ if tipo == 'Insertar uno':
                 cursor.execute(sentencia, valores)
                 registros_insertados = cursor.rowcount
                 print(f'Registros insertados: {registros_insertados}')
+
+    except Exception as e:
+        print(f'Ocurrio un error: {e}')
+
+    finally:
+        conexion.close()
+
+if tipo == 'Actualizar uno':
+    try:
+        with conexion:
+            with conexion.cursor() as cursor:
+                sentencia = 'UPDATE persona SET nombre= %s, apellido=%s, email=%s WHERE id_persona=%s'
+                valores = ('Juan Carlos', 'Castro', 'jcastro@mail.com', 7)
+
+                cursor.execute(sentencia, valores)
+                registros_actualizados = cursor.rowcount
+                print(f'Registros actualizados: {registros_actualizados}')
+
+    except Exception as e:
+        print(f'Ocurrio un error: {e}')
+
+    finally:
+        conexion.close()
+
+if tipo == 'Actualizar varios':
+    try:
+        with conexion:
+            with conexion.cursor() as cursor:
+                sentencia = 'UPDATE persona SET nombre= %s, apellido=%s, email=%s WHERE id_persona=%s'
+                valores = (
+                    ('Juan Carlos', 'Castro', 'jcastro@mail.com', 7),
+                    ('Alberto', 'Morande', 'amorande@mail.com', 2),
+                    ('Veronica', 'Morales', 'vmorales@mail.com', 5),
+                )
+
+                cursor.executemany(sentencia, valores)
+                registros_actualizados = cursor.rowcount
+                print(f'Registros actualizados: {registros_actualizados}')
 
     except Exception as e:
         print(f'Ocurrio un error: {e}')
